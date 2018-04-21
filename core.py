@@ -1,42 +1,27 @@
-from Node import Node
-from VarStore import VarStore
-from utils import VarCommand
-from pprint import pprint
+import creator
+import graph
+import player
+
+
+def check_graph(story):
+    print('Cycles:', graph.has_cycles(story))
+
+    print('Shortest path:', graph.find_shortest_end_simple(story))
+
+    print('Dead-ends: ', graph.find_dead_ends(story))
+
+
+def check_player(story):
+    player.cli_player(story)
+
+
+def check_creator():
+    pass
 
 
 def main():
-    store = VarStore()
-
-    # Create nodes
-    n1 = Node('n1', store)
-    n2 = Node('n2', store)
-    n3 = Node('n3', store)
-    n4 = Node('n4', store)
-
-    block3 = VarCommand('test', '=', 5)
-    goto_4_1 = [VarCommand('test', '+', 7), VarCommand('test2', '+', 'abd')]
-    req4 = VarCommand('test', '=', 5)
-
-    n3.add_change(block3)
-    n4.add_requirement(req4)
-
-    n1.add_outgoing(n2, 'Goto 2', None)
-    n2.add_outgoing(n3, 'Goto 3', None)
-    n1.add_outgoing(n3, 'Goto 3', None)
-    n3.add_outgoing(n4, 'Goto 4', None)
-    n4.add_outgoing(n1, 'Goto 1', goto_4_1)
-
-    # Run story
-
-    current = n1
-    while True:
-        current = current.take_outgoing(current.get_possible_outgoing()[0])
-        current.update_state()
-        print(current)
-        pprint(vars(store))
-
-        if current == n1:
-            return
+    story = creator.create_test_story()
+    check_graph(story)
 
 
 if __name__ == '__main__':

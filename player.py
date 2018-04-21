@@ -16,6 +16,8 @@ def cli_player(game):
     while True:
         current.update_state()
         print_description(current)
+        if game.is_ending(current):
+            return  # Maybe ask: restart/exit/...
         choice = input('>> ')
 
         if not choice:
@@ -36,11 +38,11 @@ def cli_player(game):
             continue
 
 
-def load_story(path: str = 'game.sgs'):
-    # with open(path, 'rb') as game_file:
-    #    return pickle.load(game_file)
+def load_story(path: str = 'story.sgf'):  # StoryGraphFile
+    # with open(path, 'rb') as story_file:
+    #    return pickle.load(story_file)
 
-    return creator.create_test_game()
+    return creator.create_test_story()
 
 
 def main():
