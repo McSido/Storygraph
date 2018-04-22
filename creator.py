@@ -1,9 +1,19 @@
-from Node import Node
-from VarStore import VarStore
-from utils import VarCommand
+import sys
 from pprint import pprint
+
+from PyQt5.QtWidgets import QApplication
+
+from gui import CreatorGUI
+from Node import Node
 from story import Story
-import pickle
+from utils import VarCommand
+from VarStore import VarStore
+
+
+def open_creator():
+    app = QApplication(sys.argv)
+    ex = CreatorGUI()
+    sys.exit(app.exec_())
 
 
 def create_test_story() -> Story:
@@ -48,5 +58,13 @@ def create_test_story() -> Story:
 
 
 def save_story(story: Story, path: str = 'story.sgf'):
-    with open(path, 'wb') as file:
-        return pickle.dump(story, file)
+    raise NotImplementedError
+    # TODO: Write encoder for Story
+
+
+def main():
+    open_creator()
+
+
+if __name__ == '__main__':
+    main()

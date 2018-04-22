@@ -1,7 +1,7 @@
-from Node import Node
-import pickle
-import creator
 import pprint
+
+import creator
+from Node import Node
 
 
 def print_description(current):
@@ -39,9 +39,6 @@ def cli_player(game):
 
 
 def load_story(path: str = 'story.sgf'):  # StoryGraphFile
-    # with open(path, 'rb') as story_file:
-    #    return pickle.load(story_file)
-
     return creator.create_test_story()
 
 
