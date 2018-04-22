@@ -1,6 +1,12 @@
+import pprint
+
 import creator
+import decoder
+import encoder
 import graph
 import player
+from VarStore import VarStore
+from story import Story
 
 
 def check_graph(story):
@@ -19,13 +25,25 @@ def check_creator(story):
     creator.main()
 
 
+def playground(story: Story):
+    encoded = encoder.encode_story(story)
+
+    with open('test.json', 'w') as f:
+        f.write(encoded)
+
+    decoded = decoder.decode_story(encoded, story.store())
+
+    player.cli_player(decoded)
+
+
 def main():
     story = creator.create_test_story()
-    # creator.save_story(story)
 
     # check_creator(story)
-    check_graph(story)
-    check_player(story)
+    # check_graph(story)
+    # check_player(story)
+
+    playground(story)
 
 
 if __name__ == '__main__':

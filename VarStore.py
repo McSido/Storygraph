@@ -5,8 +5,8 @@ from typing import Any
 
 
 class VarStore(object):
-    def __init__(self):
-        self.variables = {}
+    def __init__(self, variables={}):
+        self.variables = variables
 
     def _create(self, change: VarCommand):
         var = change.variable.rstrip()

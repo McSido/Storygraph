@@ -1,12 +1,17 @@
 from Node import Node
 from VarStore import VarStore
+from typing import Set, Optional
 
 
 class Story:
-    def __init__(self):
-        self._beginning = None
-        self._nodes = set()
-        self._endings = set()
+    def __init__(self, store: VarStore)->None:
+        self._beginning: Optional[Node] = None
+        self._nodes: Set[Node] = set()
+        self._endings: Set[Node] = set()
+        self._store = store
+
+    def store(self)->VarStore:
+        return self._store
 
     def beginning(self):
         return self._beginning
@@ -26,8 +31,8 @@ class Story:
     def change_beginning(self, beginning: Node):
         self._beginning = beginning
 
-    def create_node(self, title: str, store: VarStore) -> Node:
-        new_node = Node(title, store)
+    def create_node(self, title: str) -> Node:
+        new_node = Node(title, self._store)
         if not self._nodes:
             self._beginning = new_node
         self._nodes.add(new_node)

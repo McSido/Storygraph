@@ -19,15 +19,15 @@ def open_creator():
 def create_test_story() -> Story:
 
     store = VarStore()
-    story = Story()
+    story = Story(store)
 
     # Create nodes
-    n1 = story.create_node('n1', store)
-    n2 = story.create_node('n2', store)
-    n3 = story.create_node('n3', store)
-    n4 = story.create_node('n4', store)
-    end1 = story.create_node('end1', store)
-    dead1 = story.create_node('dead-end', store)
+    n1 = story.create_node('n1')
+    n2 = story.create_node('n2')
+    n3 = story.create_node('n3')
+    n4 = story.create_node('n4')
+    end1 = story.create_node('end1')
+    dead1 = story.create_node('dead-end')
 
     n1.set_text('Currently at n1')
     n2.set_text('Currently at n2')
